@@ -1,27 +1,50 @@
 import React from 'react';
 import './App.css';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const CampoMensagem = styled.div`
-height: 97%;
 display: flex;
-flex-direction: column-reverse;
-padding-left: 10px;
+flex-direction: column;
+padding: 10px;
 `
 
 const CampoFuncionalidades = styled.div`
+display: flex;
+justify-content: space-evenly;
 width: 100%;
+padding-bottom: 10px;
 `
-const CampoInput = styled.input`
-margin:0;
-padding: 0;
+const CampoInputUsuario = styled.input`
+width: 20%;
+height: 32px;
+border-radius: 8px;
+border: none;
+padding-left: 15px;
+`
 
+const CampoInputTexto = styled.input`
+width: 55%;
+border-radius: 8px;
+border: none;
+padding-left: 15px;
 `
+
 const CampoBotao = styled.button`
-margin:0;
-padding: 0;
+width: 15%;
+border-radius: 8px;
+border: none;
+font-weight: bold;
+background-color: #FFF;
+` 
 
+const MensagemImpressa = styled.div`
+padding: 10px;
+margin: 15px;
+border-radius: 20px;
+background-color: #FFF;
+width: 40%;
 `
+
 class App extends React.Component {
   state = {
     mensagens: [
@@ -29,9 +52,7 @@ class App extends React.Component {
     ],
     valorInputUsuario: "",
     valorInputTexto: ""
-  };
-
-  
+  };  
 
   adicionaMensagem = () => {
     const novaMensagem = {
@@ -53,31 +74,31 @@ class App extends React.Component {
   render(){
     const listaDeMensagens = this.state.mensagens.map(mensagem => {
       return (
-      <div>
-        {mensagem.usuario}: {mensagem.texto}
-      </div>
+      <MensagemImpressa>
+        <strong>{mensagem.usuario}:</strong> {mensagem.texto}
+      </MensagemImpressa>
       )
     })
 
     return (
       <div className="AppTotal">
-        <div className="App">
-        <CampoMensagem>
-          {listaDeMensagens}
-        </CampoMensagem>
+        <div className="App">   
           <CampoFuncionalidades>
-            <CampoInput 
+            <CampoInputUsuario 
             placeholder="Usuário" 
             value={this.state.valorInputUsuario} 
             onChange={this.onChangeInputUsuario}
             />
-            <CampoInput 
+            <CampoInputTexto 
             placeholder="Mensagem"
             value= {this.state.valorInputTexto} 
             onChange= {this.onChangeInputTexto}
             />
-            <button onClick={this.adicionaMensagem}>Enviar</button>
+            <CampoBotao onClick={this.adicionaMensagem}>Enviar</CampoBotao>
           </CampoFuncionalidades>
+          <CampoMensagem>
+            {listaDeMensagens}
+          </CampoMensagem>
         </div>
       </div>
     );
