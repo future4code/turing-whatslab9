@@ -1,0 +1,14 @@
+.App {
+  width: 33%;
+  padding: 1px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column-reverse;
+  background-color: #BEF7C9;
+}
+
+.AppTotal {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
