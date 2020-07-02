@@ -51,8 +51,9 @@ class App extends React.Component {
      
     ],
     valorInputUsuario: "",
-    valorInputTexto: ""
-  };  
+    valorInputTexto: "",
+    valorIdMensagem:0
+  };
 
   adicionaMensagem = () => {
     const novaMensagem = {
@@ -64,6 +65,12 @@ class App extends React.Component {
     this.setState({valorInputTexto: ""})
   }
 
+  enterMensagem = (event) => {
+      if(event.key === "Enter"){
+        this.adicionaMensagem()
+      }
+    }
+
   onChangeInputUsuario = event => {
     this.setState({ valorInputUsuario: event.target.value});
   }
@@ -74,7 +81,7 @@ class App extends React.Component {
   render(){
     const listaDeMensagens = this.state.mensagens.map(mensagem => {
       return (
-      <MensagemImpressa>
+      <MensagemImpressa key={this.state.valorIdMensagem}>
         <strong>{mensagem.usuario}:</strong> {mensagem.texto}
       </MensagemImpressa>
       )
@@ -88,11 +95,13 @@ class App extends React.Component {
             placeholder="Usuário" 
             value={this.state.valorInputUsuario} 
             onChange={this.onChangeInputUsuario}
+            onKeyPress={this.enterMensagem}
             />
             <CampoInputTexto 
             placeholder="Mensagem"
             value= {this.state.valorInputTexto} 
             onChange= {this.onChangeInputTexto}
+            onKeyPress={this.enterMensagem}
             />
             <CampoBotao onClick={this.adicionaMensagem}>Enviar</CampoBotao>
           </CampoFuncionalidades>
